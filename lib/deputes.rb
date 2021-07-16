@@ -18,6 +18,7 @@ end
 
 def query_depute
   depute_table = []
+  # Si c'est trop long pour les tests, intercallez ".take(30)" entre le xpath et each.
   PAGE.xpath('//*[@id="deputes-list"]/div/ul/li/a').each do |depute_anchor|
     url = depute_anchor.xpath('./@href').text
     depute_name = depute_anchor.text.sub('M. ', '').sub('Mme ', '').split(' ').slice(0) # Sélection du premier mot après M./Mme
