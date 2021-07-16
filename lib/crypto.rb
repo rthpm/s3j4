@@ -13,9 +13,10 @@ end
 def crypto_query
   crypto_table = []
   PAGE.xpath('/html/body/div[1]/div[1]/div[2]/div/div[1]/div/div[2]/div[3]/div/table/tbody/tr').each do |tr|
+    # On efface le contenu du hash si la value est vide.
     crypto_table << Hash[tr.xpath('./td[3]/div').text, tr.xpath('./td[5]/div/a').text].delete_if { |k, _v| k.empty? }
   end
-  crypto_table.delete_if(&:empty?)
+  crypto_table.delete_if(&:empty?) # On efface les hash vides.
 end
 
 def crypto_count(number_of_results)

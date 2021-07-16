@@ -20,8 +20,8 @@ def query_depute
   depute_table = []
   PAGE.xpath('//*[@id="deputes-list"]/div/ul/li/a').each do |depute_anchor|
     url = depute_anchor.xpath('./@href').text
-    depute_name = depute_anchor.text.sub('M. ', '').sub('Mme ', '').split(' ').slice(0)
-    depute_last_name = depute_anchor.text.sub('M. ', '').sub('Mme ', '').split(' ').slice(1..3)
+    depute_name = depute_anchor.text.sub('M. ', '').sub('Mme ', '').split(' ').slice(0) # Sélection du premier mot après M./Mme
+    depute_last_name = depute_anchor.text.sub('M. ', '').sub('Mme ', '').split(' ').slice(1..3) # Sélection du reste (on suppose que c'est le nom de famille
     email = query_depute_email(url)
     printf '.' # Pour patienter
     depute_table << {

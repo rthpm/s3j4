@@ -20,11 +20,12 @@ def query_townhall
   townhall_table = []
   PAGE.xpath('//a[@class="lientxt"]').each do |town_name|
     url = town_name.xpath('./@href').text
+    # On efface le contenu du hash si l'email n'est pas renseigné
     townhall_table << Hash[town_name.text, query_townhall_email(url)].delete_if { |_k, v| v.empty? }
     printf '.' # Pour patienter
   rescue StandardError => e
   end
-  townhall_table.delete_if(&:empty?)
+  townhall_table.delete_if(&:empty?) # On efface les hash vides
 end
 
 def townhall_count(number_of_towns)
